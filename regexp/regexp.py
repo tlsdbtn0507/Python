@@ -44,8 +44,46 @@ adefgree@korea.co.kr'''
 
 res = re.findall('[a-zA-Z0-9]+\@[a-zA-Z0-9]+\.[a-zA-Z]*.*',prac1)
 
-print(res)
+# print(res)
+
+for i  in res:
+    print(i)
 
 #prac2
 #--------------------------------------------------------------------
 
+text ="""
+안녕하세요 저는 <em>홍길동</em> 입니다. 나이는 24살 세계 최고의 
+<a href="aa.aa.com">데이터 분석가</a>가 되고싶습니다.
+"""
+
+res1 = re.sub("<[^>]*>",'',text)
+print(res1)
+
+#prac3
+#--------------------------------------------------------------------
+
+text = """
+<p>
+<span>네이버가 뉴스 서비스에 인공지능(AI)을 도입해 페이지 뷰(PV)를 늘리고 이용자를 끌어 모으고 있다.</span>
+<span>네이버는 5일 오전 서울 강남구 그랜드 인터컨티넨털 호텔에서 AI 콜로키움 2019를 열고 이 같은 AI 성과와 전략을 소개했다.</span>
+<span>이날 기조연설에서 김광현 네이버 서치앤클로바 리더는 "AI 뉴스 추천 시스템인 에어스(AiRS)를 도입하면서 뉴스 소비량이 확대되고 있다" 고 말했다.</span>
+</p>
+"""
+
+itss = []
+
+res = re.finditer("<span>((?!<span>).)*<\/span>",text)
+
+for i in res:
+    itss.append(i.group().replace("<span>","").replace("</span>",""))
+
+print(itss)
+
+#advanced
+adv = []
+res = re.finditer("(?<=<span>)((?!<span>).)*(?=<\/span>)",text)
+
+for i in res:
+    adv.append(i.group())
+print(adv)
